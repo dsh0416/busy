@@ -1,5 +1,5 @@
 class CalendarHistory < ApplicationRecord
   belongs_to :calendar
 
-  enum status: %i(success failed)
+  enum status: %i(pending success failed)
 end

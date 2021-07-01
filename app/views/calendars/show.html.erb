@@ -1,0 +1,32 @@
+<div class="layout layout-nav-side">
+  <%= render "shared/menu" %>
+  <div class="main-container fullscreen">
+  <div class="container">
+    <div class="page-header">
+      <h1>Calendar Update History</h1>
+      <p class="lead"><%= @calendar.display_as %></p>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Scheduled At</th>
+          <th scope="col">Updated At</th>
+          <th scope="col">Status</th>
+          <th scope="col">Message</th>
+        </tr>
+        <tbody>
+        <% @calendar_histories.each do |history| %>
+          <tr>
+            <th scope="row"><%= history.id %></th>
+            <td><%= history.created_at.strftime("%m/%d/%Y %I:%M %p") %></td>
+            <td><%= history.updated_at.strftime("%m/%d/%Y %I:%M %p") %></td>
+            <td><%= history.status %></td>
+            <td><%= history.log %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </thead>
+    </table>
+  </div>
+</div>

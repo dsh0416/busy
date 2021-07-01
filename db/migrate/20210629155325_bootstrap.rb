@@ -1,8 +1,6 @@
 class Bootstrap < ActiveRecord::Migration[6.1]
   def change
     create_table(:users) do |t|
-      t.string :shorthand, null: true, unique: true
-
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -33,7 +31,6 @@ class Bootstrap < ActiveRecord::Migration[6.1]
       t.integer  :status, default: 0
       t.string   :content, comment: 'iCalendar Raw Content'
       t.string   :color, null: false
-      t.datetime :last_updated_at, null: true
 
       t.timestamps null: false
 
