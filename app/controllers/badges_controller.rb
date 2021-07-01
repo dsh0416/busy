@@ -5,7 +5,7 @@ class BadgesController < ApplicationController
     color = '66ccff'
     status = 'Free'
 
-    @user.calendars.each do |calendar|
+    @user.calendars.where(status: %i(enabled paused)).each do |calendar|
       if calendar.covered?(DateTime.now)
         color = calendar.color[1..-1]
         status = calendar.display_as
