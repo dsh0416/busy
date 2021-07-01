@@ -19,6 +19,9 @@ class BadgesController < ApplicationController
       color: color,
     }
 
+    response.headers["Cache-Control"] = "no-cache, no-store"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Mon, 01 Jan 1990 00:00:00 GMT"
     send_data resp.body, :filename => 'status.svg', :type => 'image/svg+xml'
   end
 end
