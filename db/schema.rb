@@ -12,12 +12,41 @@
 
 ActiveRecord::Schema.define(version: 2021_06_29_155325) do
 
+  create_table "calendar_histories", force: :cascade do |t|
+    t.integer "status", default: 0
+    t.string "log", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "calendar_id", null: false
+    t.index ["calendar_id"], name: "index_calendar_histories_on_calendar_id"
+  end
+
+  create_table "calendars", force: :cascade do |t|
+    t.string "display_as", null: false
+    t.string "url"
+    t.integer "status", default: 0
+    t.string "content"
+    t.string "color", null: false
+    t.datetime "last_updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id", "url"], name: "index_calendars_on_user_id_and_url", unique: true
+    t.index ["user_id"], name: "index_calendars_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
+    t.string "shorthand"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
