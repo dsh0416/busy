@@ -19,11 +19,12 @@ class Calendar < ApplicationRecord
     ical = Icalendar::Calendar.parse(content)
     ical.map do |cal|
       cal.events.map do |event|
-        started = DateTime.parse(event.dtstart)
-        ended = DateTime.parse(event.dtend)
+        started = event.dtstart
+        ended = event.dtend
+        next false if started.nil? or ended.nil?
         datetime >= started and datetime <= ended
-      end.reduce(:|, false)
-    end.reduce(:|, false)
+      end.reduce(false, :|)
+    end.reduce(false, :|)
   rescue
     false
   end
