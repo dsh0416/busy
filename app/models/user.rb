@@ -5,4 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :calendars
+
+  def admin?
+    # FIXME: Add admin property
+    id == 1
+  end
 end

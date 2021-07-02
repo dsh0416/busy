@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     get 'retrieve', to: 'calendars#retrieve'
   end
 
-  mount Sidekiq::Web => '/sidekiq'
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end
