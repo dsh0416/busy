@@ -6,8 +6,9 @@ class RetrieveIcsJob < ApplicationJob
     response = Faraday.get calendar.url
     raise response.status unless response.status == 200
     calendar.content = response.body.force_encoding("UTF-8")
+    calendar.updated_at = DateTime.now # Avoid no changes
     calendar.save!
-
+    calendar.refresh_events
     calendar_history.status = :success
     calendar_history.log = 'success'
     calendar_history.save!

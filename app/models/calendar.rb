@@ -1,31 +1,32 @@
 class Calendar < ApplicationRecord
   belongs_to :user
   has_many :calendar_histories
+  has_many :calendar_events
 
   enum status: %i(enabled paused excluded)
 
-  def event_count
-    return 0 if content.blank?
+  def refresh_events
+    calendar_events.destroy_all
     ical = Icalendar::Calendar.parse(content)
-    ical.map do |cal|
-      cal.events.length
-    end.sum
-  rescue
-    0
+    ical.each do |cal|
+      cal.events.each do |event|
+        started = event.dtstart
+        ended = event.dtend
+        next if started.nil? or ended.nil?
+        CalendarEvent.create!(
+          calendar: self,
+          started_at: event.dtstart,
+          ended_at: event.dtend,
+        )
+      end
+    end
+  end
+
+  def events_count
+    calendar_events.count
   end
 
   def covered?(datetime)
-    return false if content.blank?
-    ical = Icalendar::Calendar.parse(content)
-    ical.map do |cal|
-      cal.events.map do |event|
-        started = event.dtstart
-        ended = event.dtend
-        next false if started.nil? or ended.nil?
-        datetime >= started and datetime <= ended
-      end.reduce(false, :|)
-    end.reduce(false, :|)
-  rescue
-    false
+    calendar_events.where('started_at >= ? AND ended_at <= ?', DateTime.now, DateTime.now).exists?
   end
 end
