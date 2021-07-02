@@ -14,7 +14,7 @@
         <hr>
         <h3>Calendars</h3>
         <div class="content-list-body row">
-          <% current_user.calendars.each do |calendar| %>
+          <% current_user.calendars.order('created_at DESC').each do |calendar| %>
             <div class="col-lg-6">
               <div class="card card-project">
                 <div class="progress">
