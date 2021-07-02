@@ -13,9 +13,10 @@ class Calendar < ApplicationRecord
         started = event.dtstart
         ended = event.dtend
         next if started.nil? or ended.nil?
-        next if ended - started >= 1.day # Filter all-day events
+        next if ended.to_datetime - started.to_datetime >= 1.day # Filter all-day events
         CalendarEvent.create!(
           calendar: self,
+          summary: event.summary,
           started_at: event.dtstart,
           ended_at: event.dtend,
         )
