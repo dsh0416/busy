@@ -1,3 +1,6 @@
+require 'sidekiq/web'
+require 'sidekiq/cron/web'
+
 Rails.application.routes.draw do
   get '', to: 'home#index'
 
@@ -8,4 +11,6 @@ Rails.application.routes.draw do
   resources :calendars do
     get 'retrieve', to: 'calendars#retrieve'
   end
+
+  mount Sidekiq::Web => '/sidekiq'
 end

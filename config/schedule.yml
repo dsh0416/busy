@@ -1,0 +1,4 @@
+auto_retrieve_job:
+  cron: "*/30 * * * *" # execute at every 30 minutes
+  class: AutoRetrieveJob
+  queue: default

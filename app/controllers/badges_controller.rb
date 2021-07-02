@@ -3,7 +3,7 @@ class BadgesController < ApplicationController
     @user = User.find(params[:user_id])
     
     color = '66ccff'
-    status = 'Free'
+    status = 'I’m free. Call me maybe.'
 
     @user.calendars.where(status: %i(enabled paused)).each do |calendar|
       if calendar.covered?(DateTime.now)

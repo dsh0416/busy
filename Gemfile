@@ -26,6 +26,9 @@ gem 'devise', '~> 4.8'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+gem 'sidekiq'
+gem "sidekiq-cron", "~> 1.2"
+
 gem 'faraday'
 gem 'icalendar'
 
