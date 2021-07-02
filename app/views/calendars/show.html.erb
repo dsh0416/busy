@@ -9,7 +9,6 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Scheduled At</th>
           <th scope="col">Updated At</th>
           <th scope="col">Status</th>
@@ -18,7 +17,6 @@
         <tbody>
         <% @calendar_histories.each do |history| %>
           <tr>
-            <th scope="row"><%= history.id %></th>
             <td><%= distance_of_time_in_words(history.created_at, DateTime.now) %></td>
             <td><%= distance_of_time_in_words(history.updated_at, DateTime.now) %></td>
             <td><%= history.status %></td>
