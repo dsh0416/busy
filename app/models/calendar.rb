@@ -27,6 +27,6 @@ class Calendar < ApplicationRecord
   end
 
   def covered?(datetime)
-    calendar_events.where('started_at >= ? AND ended_at <= ?', DateTime.now, DateTime.now).exists?
+    calendar_events.where('started_at <= ? AND ended_at >= ?', datetime, datetime).exists?
   end
 end
