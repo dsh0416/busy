@@ -19,8 +19,8 @@
         <% @calendar_histories.each do |history| %>
           <tr>
             <th scope="row"><%= history.id %></th>
-            <td><%= history.created_at.strftime("%m/%d/%Y %I:%M %p") %></td>
-            <td><%= history.updated_at.strftime("%m/%d/%Y %I:%M %p") %></td>
+            <td><%= distance_of_time_in_words(history.created_at, DateTime.now) %></td>
+            <td><%= distance_of_time_in_words(history.updated_at, DateTime.now) %></td>
             <td><%= history.status %></td>
             <td><%= history.log %></td>
           </tr>

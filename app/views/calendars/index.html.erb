@@ -38,7 +38,7 @@
                       <i class="material-icons mr-1">event</i>
                       <span class="text-small"><%= calendar.event_count %></span>
                     </div>
-                    <span class="text-small" data-filter-by="text">Updated: <%= calendar.updated_at.strftime("%m/%d/%Y %I:%M %p") %></span>
+                    <span class="text-small" data-filter-by="text">Updated: <%= distance_of_time_in_words(calendar.updated_at, DateTime.now) %></span>
                   </div>
                 </div>
               </div>
