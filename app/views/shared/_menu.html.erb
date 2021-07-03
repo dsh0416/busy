@@ -13,7 +13,7 @@
           <img alt="Image" src="/assets/img/avatar-male-4.jpg" class="avatar" />
         </a>
         <div class="dropdown-menu dropdown-menu-right">
-          <a href="#" class="dropdown-item">Log Out</a>
+          <%= link_to "Log Out", destroy_user_session_path, :method => :delete, class: "dropdown-item" %>
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@
         <img alt="Image" src="<%= current_user.gravatar %>" class="avatar" />
       </a>
       <div class="dropdown-menu">
-        <a href="#" class="dropdown-item">Log Out</a>
+        <%= link_to "Log Out", destroy_user_session_path, :method => :delete, class: "dropdown-item" %>
       </div>
     </div>
   </div>
