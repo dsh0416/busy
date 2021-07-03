@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_07_02_014009) do
 
   create_table "calendar_events", force: :cascade do |t|
+    t.string "summary", null: false
     t.datetime "started_at", null: false
     t.datetime "ended_at", null: false
     t.integer "calendar_id", null: false
