@@ -10,4 +10,10 @@ class User < ApplicationRecord
     # FIXME: Add admin property
     id == 1
   end
+
+  def gravatar
+    email_address = email.downcase
+    hash = Digest::MD5.hexdigest(email_address)
+    "https://www.gravatar.com/avatar/#{hash}"
+  end
 end
