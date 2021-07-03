@@ -6,20 +6,22 @@ class Calendar < ApplicationRecord
   enum status: %i(enabled paused excluded)
 
   def refresh_events
-    calendar_events.destroy_all
-    ical = Icalendar::Calendar.parse(content)
-    ical.each do |cal|
-      cal.events.each do |event|
-        started = event.dtstart
-        ended = event.dtend
-        next if started.nil? or ended.nil?
-        next if started.to_datetime + 1.day <= ended.to_datetime # Filter all-day events
-        CalendarEvent.create!(
-          calendar: self,
-          summary: event.summary,
-          started_at: event.dtstart,
-          ended_at: event.dtend,
-        )
+    ActiveRecord::Base.transaction do
+      calendar_events.destroy_all
+      ical = Icalendar::Calendar.parse(content)
+      ical.each do |cal|
+        cal.events.each do |event|
+          started = event.dtstart
+          ended = event.dtend
+          next if started.nil? or ended.nil?
+          next if started.to_datetime + 1.day <= ended.to_datetime # Filter all-day events
+          CalendarEvent.create!(
+            calendar: self,
+            summary: event.summary,
+            started_at: event.dtstart,
+            ended_at: event.dtend,
+          )
+        end
       end
     end
   end

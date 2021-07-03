@@ -33,6 +33,16 @@ class CalendarsController < ApplicationController
     @calendar_histories = @calendar.calendar_histories.order('created_at DESC')
   end
 
+  def destroy
+    ActiveRecord::Base.transaction do
+      @calendar = Calendar.where(user: current_user, id: params[:id]).first
+      @calendar.calendar_events.destroy_all
+      @calendar.calendar_histories.destroy_all
+      @calendar.destroy!
+    end
+    redirect_to action: :index
+  end
+
   private
   def calendar_params
     params.require(:calendar).permit(:display_as, :url, :status, :color).merge(user_id: current_user.id)

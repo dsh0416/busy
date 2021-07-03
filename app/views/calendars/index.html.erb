@@ -28,6 +28,8 @@
                     <div class="dropdown-menu dropdown-menu-right">
                       <%= link_to "Edit", "/calendars/#{calendar.id}/edit", class: "dropdown-item" %>
                       <%= link_to "Manual Update", "/calendars/#{calendar.id}/retrieve", class: "dropdown-item" %>
+                      <hr>
+                      <%= link_to "Delete", calendar, method: :delete, class: "dropdown-item text-danger" %>
                     </div>
                   </div>
                   <div class="card-title">
