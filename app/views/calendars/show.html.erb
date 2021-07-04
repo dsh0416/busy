@@ -1,30 +1,31 @@
 <div class="layout layout-nav-side">
   <%= render "shared/menu" %>
   <div class="main-container fullscreen">
-  <div class="container">
-    <div class="page-header">
-      <h1>Calendar Update History</h1>
-      <p class="lead"><%= @calendar.display_as %></p>
-    </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Scheduled At</th>
-          <th scope="col">Updated At</th>
-          <th scope="col">Status</th>
-          <th scope="col">Message</th>
-        </tr>
-        <tbody>
-        <% @calendar_histories.each do |history| %>
+    <div class="container">
+      <div class="page-header">
+        <h1>Calendar Update History</h1>
+        <p class="lead"><%= @calendar.display_as %></p>
+      </div>
+      <table class="table">
+        <thead>
           <tr>
-            <td><%= distance_of_time_in_words(history.created_at, DateTime.now) %></td>
-            <td><%= distance_of_time_in_words(history.updated_at, DateTime.now) %></td>
-            <td><%= history.status %></td>
-            <td><%= history.log %></td>
+            <th scope="col">Scheduled At</th>
+            <th scope="col">Updated At</th>
+            <th scope="col">Status</th>
+            <th scope="col">Message</th>
           </tr>
-        <% end %>
-        </tbody>
-      </thead>
-    </table>
+          <tbody>
+          <% @calendar_histories.each do |history| %>
+            <tr>
+              <td><%= distance_of_time_in_words(history.created_at, DateTime.now) %></td>
+              <td><%= distance_of_time_in_words(history.updated_at, DateTime.now) %></td>
+              <td><%= history.status %></td>
+              <td><%= history.log %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </thead>
+      </table>
+    </div>
   </div>
 </div>

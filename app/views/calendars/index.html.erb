@@ -1,53 +1,54 @@
 <div class="layout layout-nav-side">
   <%= render "shared/menu" %>
   <div class="main-container">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-11 col-xl-10">
-        <div class="page-header">
-          <h1>Dashboard</h1>
-          <p class="lead">The dashboard of your calendars.</p>
-        </div>
-        <hr>
-        <h3>Badge</h3>
-        <img src="<%= "/badges/#{current_user.id}" %>">
-        <hr>
-        <h3>Calendars</h3>
-        <div class="content-list-body row">
-          <% current_user.calendars.order('created_at DESC').each do |calendar| %>
-            <div class="col-lg-6">
-              <div class="card card-project">
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" style="width: 100%; background-color: <%= calendar.color %>"></div>
-                </div>
-                <div class="card-body">
-                  <div class="dropdown card-options">
-                    <button class="btn-options" type="button" id="project-dropdown-button-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="material-icons">more_vert</i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <%= link_to "Edit", "/calendars/#{calendar.id}/edit", class: "dropdown-item" %>
-                      <%= link_to "Manual Update", "/calendars/#{calendar.id}/retrieve", class: "dropdown-item" %>
-                      <hr>
-                      <%= link_to "Delete", calendar, method: :delete, class: "dropdown-item text-danger" %>
-                    </div>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-11 col-xl-10">
+          <div class="page-header">
+            <h1>Dashboard</h1>
+            <p class="lead">The dashboard of your calendars.</p>
+          </div>
+          <hr>
+          <h3>Badge</h3>
+          <img src="<%= "/badges/#{current_user.id}" %>">
+          <hr>
+          <h3>Calendars</h3>
+          <div class="content-list-body row">
+            <% current_user.calendars.order('created_at DESC').each do |calendar| %>
+              <div class="col-lg-6">
+                <div class="card card-project">
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 100%; background-color: <%= calendar.color %>"></div>
                   </div>
-                  <div class="card-title">
-                    <a href="<%= "/calendars/#{calendar.id}" %>"><h5 data-filter-by="text"><%= calendar.display_as %></h5></a>
-                  </div>
-                  <div class="card-meta d-flex justify-content-between">
-                    <div class="d-flex align-items-center">
-                      <i class="material-icons mr-1">event</i>
-                      <span class="text-small"><%= calendar.events_count %></span>
+                  <div class="card-body">
+                    <div class="dropdown card-options">
+                      <button class="btn-options" type="button" id="project-dropdown-button-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">more_vert</i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <%= link_to "Edit", "/calendars/#{calendar.id}/edit", class: "dropdown-item" %>
+                        <%= link_to "Manual Update", "/calendars/#{calendar.id}/retrieve", class: "dropdown-item" %>
+                        <hr>
+                        <%= link_to "Delete", calendar, method: :delete, class: "dropdown-item text-danger" %>
+                      </div>
                     </div>
-                    <span class="text-small" data-filter-by="text">Updated: <%= distance_of_time_in_words(calendar.updated_at, DateTime.now) %></span>
+                    <div class="card-title">
+                      <a href="<%= "/calendars/#{calendar.id}" %>"><h5 data-filter-by="text"><%= calendar.display_as %></h5></a>
+                    </div>
+                    <div class="card-meta d-flex justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <i class="material-icons mr-1">event</i>
+                        <span class="text-small"><%= calendar.events_count %></span>
+                      </div>
+                      <span class="text-small" data-filter-by="text">Updated: <%= distance_of_time_in_words(calendar.updated_at, DateTime.now) %></span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          <% end %>
-          <hr>
-          <%= link_to "Add New Calendar", '/calendars/new' %>
+            <% end %>
+            <hr>
+            <%= link_to "Add New Calendar", '/calendars/new' %>
+          </div>
         </div>
       </div>
     </div>
