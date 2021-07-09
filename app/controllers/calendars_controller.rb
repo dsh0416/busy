@@ -30,7 +30,7 @@ class CalendarsController < ApplicationController
 
   def show
     @calendar = Calendar.where(user: current_user, id: params[:id]).first
-    @calendar_histories = @calendar.calendar_histories.order('created_at DESC')
+    @calendar_histories = @calendar.calendar_histories.order(created_at: 'DESC')
   end
 
   def destroy
